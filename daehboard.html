@@ -1,348 +1,668 @@
+I have analyzed your requirements and the code you've provided. You need a single, cohesive HTML document that combines your dashboard design with the WiFi-Charge project documentation and a functional, interactive interface.
+
+Here is a complete, self-contained HTML document that merges all your requirements. It includes the profile section with a login popup, the YouTube banner, the 3x3 app grid with multi-color glow effects, the WiFi setup system message, and the project documentation section.
+
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Sohel Hossain - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>WiFi-Charge | Sohel Hossain Dashboard</title>
+    <!-- Font Awesome 6 (Free Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --neon-blue: #00f2ff;
-            --bg-dark: #010409; 
+            --bg-dark: #010409;
             --yt-red: #ff0000;
-            --card-bg: rgba(13, 17, 23, 0.7); 
-            --glow-cyan: 0 0 10px rgba(0, 242, 255, 0.5);
-            --border-color: rgba(240, 246, 252, 0.1);
+            --card-bg: rgba(13, 17, 23, 0.75);
+            --glow-cyan: 0 0 12px rgba(0, 242, 255, 0.5);
+            --border-color: rgba(240, 246, 252, 0.12);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            /* Multicolor Background Glow */
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(63, 185, 80, 0.15), transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(255, 0, 80, 0.1), transparent 40%),
-                linear-gradient(180deg, #010409 0%, #0d1117 100%);
-            color: white;
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, Roboto, sans-serif;
+            background: #010409;
+            color: #f0f6fc;
+            overflow-x: hidden;
+        }
+
+        /* ---------- MULTICOLOR GRADIENT BACKGROUND (GLOW) ---------- */
+        .multicolor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(63, 185, 80, 0.2), transparent 45%),
+                        radial-gradient(circle at 85% 70%, rgba(255, 0, 80, 0.18), transparent 55%),
+                        radial-gradient(circle at 10% 80%, rgba(0, 242, 255, 0.12), transparent 50%),
+                        linear-gradient(145deg, #010409 0%, #0a0e17 100%);
+        }
+
+        /* main container on top of glow */
+        .app-container {
+            position: relative;
+            z-index: 2;
+            max-width: 550px;
+            margin: 0 auto;
+            background: transparent;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            backdrop-filter: blur(1px);
         }
 
-        /* --- 1. Profile Header --- */
+        /* ----- 1. PROFILE HEADER (Glassmorphism) ----- */
         .profile-header {
-            height: 70px;
+            background: rgba(1, 4, 9, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            background: rgba(1, 4, 9, 0.9);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 10;
+            flex-shrink: 0;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
+        .user-info:active { opacity: 0.8; }
 
         .avatar {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0d1117, #1a1f2a);
             border-radius: 50%;
             border: 2px solid var(--neon-blue);
-            background: #0d1117;
+            box-shadow: var(--glow-cyan);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
+            font-weight: 800;
+            font-size: 20px;
             color: var(--neon-blue);
-            box-shadow: var(--glow-cyan);
             position: relative;
         }
-        
         .avatar::after {
             content: '';
             position: absolute;
-            top: 2px;
+            bottom: 2px;
             right: 2px;
-            width: 8px;
-            height: 8px;
-            background-color: #ff4444;
+            width: 12px;
+            height: 12px;
+            background: #3fb950;
+            border: 2px solid #010409;
             border-radius: 50%;
-            border: 1px solid var(--bg-dark);
         }
 
         .user-text h2 {
-            margin: 0;
             font-size: 13px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
-
         .user-text p {
-            margin: 2px 0 0;
             font-size: 10px;
-            color: #8b949e;
-        }
-        
-        .user-text p i {
-            color: #3fb950;
-            margin-right: 3px;
-        }
-
-        .settings-icon {
-            color: #8b949e;
-            font-size: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .settings-icon:hover { transform: rotate(90deg); color: var(--neon-blue); }
-
-        /* --- 2. YouTube Banner --- */
-        .youtube-section { padding: 20px; }
-
-        .yt-card {
-            width: 100%;
-            height: 140px;
-            background: #000;
-            border: 2px solid var(--yt-red);
-            border-radius: 12px;
+            color: #b1bac4;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .premium-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 2px 6px;
+            border-radius: 20px;
+            font-size: 8px;
+            font-weight: bold;
+            color: #000;
+        }
+        .settings-icon {
+            font-size: 22px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .settings-icon:hover { color: var(--neon-blue); transform: rotate(20deg); }
+
+        /* ----- 2. YOUTUBE BANNER (PROMINENT) ----- */
+        .youtube-section {
+            padding: 16px 20px;
+        }
+        .yt-card {
+            background: #000000cc;
+            border: 2px solid var(--yt-red);
+            border-radius: 24px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-            text-decoration: none;
+            flex-direction: column;
+            padding: 20px 0;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
             cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
         }
-
-        .yt-card i.fa-youtube { font-size: 50px; color: var(--yt-red); }
-
-        .yt-card .yt-text {
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
+        .yt-card:active { transform: scale(0.98); }
+        .yt-card i { font-size: 56px; color: #ff0000; text-shadow: 0 0 8px red; }
+        .yt-text {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
             margin-top: 8px;
-            letter-spacing: 1px;
         }
 
-        /* --- 3. App Grid (Glassmorphism) --- */
+        /* ----- 3. APP GRID (3x3) GLASS + MULTICOLOR GLOW (per card) ----- */
         .app-grid {
-            flex: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 10px 20px 80px;
+            gap: 16px;
+            padding: 12px 20px;
+            flex: 1;
             overflow-y: auto;
+            padding-bottom: 90px;
         }
 
         .app-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 90px;
-            border: 1px solid var(--border-color);
-            transition: 0.2s;
+            padding: 14px 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s ease;
             text-decoration: none;
             color: white;
             cursor: pointer;
         }
+        .app-card:active { transform: scale(0.94); background: rgba(30,36,44,0.9); }
 
-        .app-card:active { transform: scale(0.9); }
+        /* Individual multicolor neon glow (different per row/card) */
+        .app-card:nth-child(1) { box-shadow: 0 6px 14px rgba(66,133,244,0.35); border-top: 1px solid #4285f4; }
+        .app-card:nth-child(2) { box-shadow: 0 6px 14px rgba(24,119,242,0.35); border-top: 1px solid #1877f2; }
+        .app-card:nth-child(3) { box-shadow: 0 6px 14px rgba(142,117,255,0.4); border-top: 1px solid #8e75ff; }
+        .app-card:nth-child(4) { box-shadow: 0 6px 14px rgba(255,0,80,0.4); border-top: 1px solid #ff0050; }
+        .app-card:nth-child(5) { box-shadow: 0 6px 14px rgba(37,211,102,0.4); border-top: 1px solid #25d366; }
+        .app-card:nth-child(6) { box-shadow: 0 6px 14px rgba(255,215,0,0.4); border-top: 1px solid #ffd700; }
+        .app-card:nth-child(7) { box-shadow: 0 6px 14px rgba(52,199,89,0.4); border-top: 1px solid #34c759; }
+        .app-card:nth-child(8) { box-shadow: 0 6px 14px rgba(0,242,255,0.4); border-top: 1px solid #00f2ff; }
+        .app-card:nth-child(9) { box-shadow: 0 6px 14px rgba(240,246,252,0.3); border-top: 1px solid #f0f6fc; }
 
-        /* Row Glow Colors */
-        .app-card:nth-child(1) { box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2); }
-        .app-card:nth-child(2) { box-shadow: 0 5px 15px rgba(24, 119, 242, 0.2); }
-        .app-card:nth-child(3) { box-shadow: 0 5px 15px rgba(142, 117, 255, 0.2); }
-        .app-card:nth-child(5) { box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2); }
+        .app-card i { font-size: 32px; margin-bottom: 8px; }
+        .app-card span { font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
 
-        .app-card i { font-size: 28px; margin-bottom: 8px; }
-        .app-card span { font-size: 11px; font-weight: 500; }
-
-        /* --- 4. Overlays & Popups --- */
-        .overlay {
+        /* ----- 4. LOGIN POPUP (Email+Password) ----- */
+        .overlay-modal {
             position: fixed;
-            inset: 0;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
+            backdrop-filter: blur(12px);
+            display: flex;
             align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(8px);
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
         }
-
-        .overlay.active { display: flex; }
-
-        .popup {
-            background: #161b22;
-            width: 85%;
-            max-width: 320px;
-            border-radius: 12px;
+        .overlay-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .login-card {
+            background: #161c24;
+            border-radius: 32px;
+            width: 86%;
+            max-width: 340px;
             border: 1px solid var(--neon-blue);
-            padding: 20px;
-            animation: fadeIn 0.3s;
+            padding: 24px 22px;
+            box-shadow: 0 20px 35px rgba(0,242,255,0.2);
+            transform: scale(0.95);
+            transition: transform 0.2s;
+        }
+        .overlay-modal.active .login-card { transform: scale(1); }
+        .login-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .login-header h3 {
+            color: var(--neon-blue);
+            font-size: 1.3rem;
+        }
+        .close-login {
+            font-size: 28px;
+            cursor: pointer;
+            color: #9ca3af;
+            background: none;
+            border: none;
+        }
+        .input-group {
+            margin-bottom: 18px;
+        }
+        .input-group label {
+            font-size: 12px;
+            color: #b9c3d1;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            background: #0d1117;
+            border: 1px solid #2d3748;
+            padding: 12px 14px;
+            border-radius: 18px;
+            color: white;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 8px rgba(0,242,255,0.4);
+        }
+        .login-btn {
+            width: 100%;
+            background: transparent;
+            border: 1.5px solid var(--neon-blue);
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: var(--neon-blue);
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 6px;
+        }
+        .login-btn:active { background: rgba(0,242,255,0.2); }
+
+        /* ----- 5. SYSTEM MESSAGE (WiFi updating) ----- */
+        .system-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: #1f2a3aee;
+            backdrop-filter: blur(20px);
+            border-left: 5px solid #3fb950;
+            padding: 14px 18px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1100;
+            transform: translateY(120%);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .system-toast.show {
+            transform: translateY(0);
+        }
+        .system-toast p {
+            font-size: 13px;
+            font-weight: 500;
+            margin: 0;
+        }
+        .toast-btn {
+            background: #2e3b44;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 40px;
+            color: #3fb950;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        @keyframes fadeIn { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 11px; color: #8b949e; margin-bottom: 5px; }
-        .form-group input {
-            width: 100%; padding: 10px; background: #0d1117; border: 1px solid #30363d;
-            border-radius: 6px; color: white; box-sizing: border-box;
+        /* ----- 6. DOCUMENTATION / ROADMAP SECTION (Collapsible style) ----- */
+        .docs-section {
+            background: rgba(1, 4, 9, 0.85);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            margin-top: 8px;
+            border-radius: 28px 28px 0 0;
+            padding: 14px 20px 20px;
+            margin-bottom: 10px;
         }
-
-        .btn-primary {
-            width: 100%; padding: 10px; background: transparent; color: var(--neon-blue);
-            border: 1px solid var(--neon-blue); border-radius: 6px; font-weight: bold; cursor: pointer;
+        .docs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--neon-blue);
+            letter-spacing: 0.5px;
         }
-
+        .docs-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            font-size: 11px;
+            color: #cdd9f4;
+            line-height: 1.5;
+        }
+        .docs-content.open {
+            max-height: 500px; /* enough for content */
+            margin-top: 12px;
+        }
+        .docs-content ul {
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+        .tech-badge {
+            background: #0e1a24;
+            border-radius: 16px;
+            padding: 4px 8px;
+            display: inline-block;
+            margin: 3px;
+            font-size: 10px;
+        }
+        hr {
+            border-color: #2d3748;
+            margin: 12px 0;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 9px;
+            padding: 8px;
+            color: #6c7a8f;
+        }
     </style>
 </head>
 <body>
+<div class="multicolor-glow"></div>
+<div class="app-container">
 
-    <header class="profile-header">
-        <div class="user-info" id="userInfo">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="user-info" id="openLoginBtn">
             <div class="avatar">SH</div>
             <div class="user-text">
                 <h2>MOHAMMAD SOHEL HOSSAIN</h2>
-                <p><i class="fas fa-check-circle"></i> PREMIUM USER</p>
+                <p><i class="fas fa-gem" style="color:#fbbf24;"></i> PREMIUM USER <span class="premium-badge">VIP</span></p>
             </div>
         </div>
-        <i class="fas fa-cog settings-icon" onclick="openAndroidSettings()"></i>
-    </header>
+        <i class="fas fa-cog settings-icon" id="settingsIcon"></i>
+    </div>
 
-    <section class="youtube-section">
-        <div class="yt-card" onclick="openApp('com.google.android.youtube', 'https://www.youtube.com')">
+    <!-- YouTube Banner (opens official YouTube) -->
+    <div class="youtube-section">
+        <div class="yt-card" id="youtubeCard">
             <i class="fab fa-youtube"></i>
             <div class="yt-text">YOUTUBE</div>
         </div>
-    </section>
+    </div>
 
-    <main class="app-grid">
-        <div class="app-card" onclick="openApp('com.android.chrome', 'https://google.com')">
+    <!-- 3x3 App Grid -->
+    <div class="app-grid">
+        <!-- 1 Google -->
+        <div class="app-card" data-app="google" data-pkg="com.android.chrome" data-url="https://google.com">
             <i class="fab fa-google" style="color: #4285F4;"></i>
             <span>Google</span>
         </div>
-        <div class="app-card" onclick="openApp('com.facebook.katana', 'https://facebook.com')">
+        <!-- 2 Facebook -->
+        <div class="app-card" data-app="fb" data-pkg="com.facebook.katana" data-url="https://facebook.com">
             <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
             <span>Facebook</span>
         </div>
-        <div class="app-card" onclick="openApp('com.google.android.apps.bard', 'https://gemini.google.com')">
+        <!-- 3 Gemini AI -->
+        <div class="app-card" data-app="gemini" data-pkg="com.google.android.apps.bard" data-url="https://gemini.google.com">
             <i class="fas fa-wand-magic-sparkles" style="color: #8E75FF;"></i>
             <span>Gemini AI</span>
         </div>
-        <div class="app-card" onclick="openApp('com.zhiliaoapp.musically', 'https://tiktok.com')">
+        <!-- 4 TikTok -->
+        <div class="app-card" data-app="tiktok" data-pkg="com.zhiliaoapp.musically" data-url="https://tiktok.com">
             <i class="fab fa-tiktok" style="color: #FF0050;"></i>
             <span>TikTok</span>
         </div>
-        <div class="app-card" onclick="openApp('com.whatsapp', 'https://whatsapp.com')">
+        <!-- 5 WhatsApp -->
+        <div class="app-card" data-app="wa" data-pkg="com.whatsapp" data-url="https://whatsapp.com">
             <i class="fab fa-whatsapp" style="color: #25D366;"></i>
             <span>WhatsApp</span>
         </div>
-        <div class="app-card" onclick="openApp('com.quran.labs.androidapp', 'https://quran.com')">
+        <!-- 6 Al-Quran -->
+        <div class="app-card" data-app="quran" data-pkg="com.quran.labs.androidapp" data-url="https://quran.com">
             <i class="fas fa-book-quran" style="color: #FFD700;"></i>
             <span>Al-Quran</span>
         </div>
-        <a href="tel:" class="app-card">
+        <!-- 7 Dialer -->
+        <div class="app-card" id="dialerBtn">
             <i class="fas fa-phone-alt" style="color: #34C759;"></i>
             <span>Dialer</span>
-        </a>
-        <div class="app-card" id="wifiBtn">
-            <i class="fas fa-wifi" style="color: var(--neon-blue);"></i>
+        </div>
+        <!-- 8 WiFi Setup (system message) -->
+        <div class="app-card" id="wifiSetupBtn">
+            <i class="fas fa-wifi" style="color: #00f2ff;"></i>
             <span>WiFi Setup</span>
         </div>
-        <div class="app-card" onclick="openApp('com.github.android', 'https://github.com/new')">
+        <!-- 9 GitHub New -->
+        <div class="app-card" data-app="github" data-pkg="com.github.android" data-url="https://github.com/new">
             <i class="fab fa-github" style="color: #F0F6FC;"></i>
-            <span>GitHub</span>
+            <span>GitHub New</span>
         </div>
-    </main>
+    </div>
 
-    <div class="overlay" id="loginOverlay">
-        <div class="popup">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h3 style="margin:0; font-size:16px; color:var(--neon-blue);">Profile Login</h3>
-                <span id="closeLogin" style="cursor:pointer; font-size:20px;">&times;</span>
+    <!-- Collapsible Documentation (Roadmap + WiFi-Charge) -->
+    <div class="docs-section">
+        <div class="docs-header" id="docsToggle">
+            <span><i class="fas fa-code-branch"></i> 📘 Project Roadmap & Documentation</span>
+            <i class="fas fa-chevron-down" id="toggleIcon"></i>
+        </div>
+        <div class="docs-content" id="docsContent">
+            <p><strong>⚡ WiFi-Charge: Data Stronger</strong> — ব্যবহারকারীরা ওয়াই-ফাই ব্যবহারের বিনিময়ে ক্রেডিট পায় এবং অ্যাপ-টু-অ্যাপ কলিং উপভোগ করে।</p>
+            <ul>
+                <li><strong>🎯 Core Feature:</strong> ব্যাকগ্রাউন্ডে Wi-Fi ট্র্যাকিং, ৯টি অ্যাপ ব্যবহারে ক্রেডিট আর্নিং, ফ্রি কলিং সিস্টেম।</li>
+                <li><strong>💰 Credit Logic:</strong> ড্যাশবোর্ড থেকে ইউটিউব/গুগল/ফেসবুক ইত্যাদি ব্যবহার করলে ডেটা সিগন্যাল অনুযায়ী ক্রেডিট জমা হবে।</li>
+                <li><strong>📞 App-to-App Call:</strong> জমানো ক্রেডিট দিয়ে বন্ধুদের সাথে হাই-কোয়ালিটি ভয়েস কল (শুধুমাত্র WiFi-Charge ইউজারদের মধ্যে)।</li>
+                <li><strong>🛠️ Tech Stack:</strong> Kotlin / Jetpack Compose, Firebase Auth, MVVM, Glow UI Design.</li>
+                <li><strong>🔐 Permissions:</strong> INTERNET, QUERY_ALL_PACKAGES, ACCESS_WIFI_STATE, READ_CONTACTS.</li>
+            </ul>
+            <hr>
+            <p><span class="tech-badge"><i class="fab fa-android"></i> Android Native</span> <span class="tech-badge"><i class="fas fa-database"></i> Firebase</span> <span class="tech-badge"><i class="fas fa-palette"></i> Glassmorphism</span></p>
+            <p>✅ ড্যাশবোর্ড ডিজাইন: প্রোফাইল লগইন, ইউটিউব ব্যানার, মাল্টিকালার গ্রিড, সেটিংস -> ফোন সেটিংস লিংক।<br>
+            🔄 WiFi Setup কার্ডে ক্লিক করলে "এটি Updated হচ্ছে" মেসেজ দেখাবে।</p>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-bolt"></i> WiFi-Charge · ক্রেডিট আর্ন করুন · ফ্রি কল করুন
+    </div>
+</div>
+
+<!-- Login Popup Modal (Email+Password) -->
+<div id="loginModal" class="overlay-modal">
+    <div class="login-card">
+        <div class="login-header">
+            <h3><i class="fas fa-user-astronaut"></i> Play Store Login</h3>
+            <button class="close-login" id="closeLoginModalBtn">&times;</button>
+        </div>
+        <form id="loginFormModal">
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="loginEmail" placeholder="your@example.com" required>
             </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="email@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn-primary">Login</button>
-            </form>
-        </div>
+            <div class="input-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" placeholder="********" required>
+            </div>
+            <button type="submit" class="login-btn">Login to Dashboard</button>
+        </form>
+        <div style="font-size:10px; text-align:center; margin-top:14px;">Demo: any credentials → redirects to Play Store</div>
     </div>
+</div>
 
-    <div class="overlay" id="sysOverlay">
-        <div class="popup" style="text-align:center; border-color:#3fb950;">
-            <h4 style="color:#3fb950; margin-top:0;">System Message</h4>
-            <p style="font-size:12px; color:#c9d1d9;">This feature is currently being updated. Please check back later.</p>
-            <button class="btn-primary" id="closeSys" style="border-color:#3fb950; color:#3fb950; width:auto; padding:5px 20px;">OK</button>
-        </div>
-    </div>
+<!-- System Toast (WiFi updating message) -->
+<div id="wifiToast" class="system-toast">
+    <p><i class="fas fa-sync-alt"></i> 📡 এই ফিচারটি আপডেট করা হচ্ছে। দয়া করে পরে চেক করুন।</p>
+    <button class="toast-btn" id="closeToastBtn">OK</button>
+</div>
 
-    <script>
-        // --- App Redirect Logic ---
-        function openApp(packageName, webUrl) {
-            const playStoreUrl = "https://play.google.com/store/apps/details?id=" + packageName;
-            
-            // Try to open via Intent (Android), fallback to Web URL
-            // Note: In a real browser, we check if the app is installed.
-            // If it fails to open the app, it redirects to Play Store.
-            window.location.href = "intent://#Intent;package=" + packageName + ";end";
-            
-            setTimeout(() => {
-                window.location.href = playStoreUrl;
-            }, 500);
-        }
+<script>
+    // ------------------------------
+    // 1. App launcher: attempt intent / fallback
+    // ------------------------------
+    function openAppOrUrl(packageName, fallbackUrl) {
+        // Android intent scheme (works in WebView / Chrome on Android)
+        const intentUrl = `intent://#Intent;package=${packageName};scheme=${packageName};end`;
+        window.location.href = intentUrl;
+        // Fallback after 700ms
+        setTimeout(() => {
+            window.location.href = fallbackUrl;
+        }, 650);
+    }
 
-        function openAndroidSettings() {
-            // Standard Android Settings Intent
-            window.location.href = "intent:#Intent;action=android.settings.SETTINGS;end";
-            // Fallback alert
-            setTimeout(() => { alert("Opening System Settings..."); }, 100);
-        }
+    // Dialer (special: tel: intent)
+    function openDialer() {
+        window.location.href = "tel:";
+        setTimeout(() => {
+            // if fails, show simple alert
+            alert("Dialer will open your phone's calling pad.");
+        }, 300);
+    }
 
-        // --- UI Interactions ---
-        const loginOverlay = document.getElementById('loginOverlay');
-        const sysOverlay = document.getElementById('sysOverlay');
+    // open Android system settings
+    function openAndroidSystemSettings() {
+        // For Android, using intent to open main settings
+        window.location.href = "intent:#Intent;action=android.settings.SETTINGS;end";
+        setTimeout(() => {
+            alert("⚙️ Opening system settings... (if not redirected, go to settings manually)");
+        }, 400);
+    }
 
-        document.getElementById('userInfo').onclick = () => loginOverlay.classList.add('active');
-        document.getElementById('closeLogin').onclick = () => loginOverlay.classList.remove('active');
-        
-        document.getElementById('wifiBtn').onclick = () => sysOverlay.classList.add('active');
-        document.getElementById('closeSys').onclick = () => sysOverlay.classList.remove('active');
+    // YouTube official open (YouTube app or web)
+    function openYoutube() {
+        openAppOrUrl('com.google.android.youtube', 'https://www.youtube.com');
+    }
 
-        document.getElementById('loginForm').onsubmit = (e) => {
-            e.preventDefault();
-            // Redirect to Play Store after "login"
-            window.location.href = "https://play.google.com/store/apps";
-        };
-
-        // Close overlays on outside click
-        window.onclick = (e) => {
-            if (e.target.classList.contains('overlay')) {
-                e.target.classList.remove('active');
+    // grid cards handler
+    document.querySelectorAll('.app-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // special cases: Dialer + WiFi Setup
+            if (card.id === 'dialerBtn') {
+                openDialer();
+                return;
             }
-        };
-    </script>
+            if (card.id === 'wifiSetupBtn') {
+                // show system message toast (WiFi updated message)
+                const toast = document.getElementById('wifiToast');
+                toast.classList.add('show');
+                // auto hide after 3 sec? but we let user close, but better keep until close.
+                return;
+            }
+            // for other cards: get data-pkg and data-url
+            const pkg = card.getAttribute('data-pkg');
+            const url = card.getAttribute('data-url');
+            if (pkg && url) {
+                openAppOrUrl(pkg, url);
+            } else {
+                // fallback (google default)
+                window.open('https://google.com', '_blank');
+            }
+        });
+    });
+
+    // youtube card
+    document.getElementById('youtubeCard')?.addEventListener('click', openYoutube);
+
+    // settings icon -> open phone settings
+    document.getElementById('settingsIcon')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAndroidSystemSettings();
+    });
+
+    // ----- LOGIN MODAL (email + password) -----
+    const loginModal = document.getElementById('loginModal');
+    const openLoginBtn = document.getElementById('openLoginBtn');
+    const closeLoginBtn = document.getElementById('closeLoginModalBtn');
+    const loginFormModal = document.getElementById('loginFormModal');
+
+    openLoginBtn.addEventListener('click', () => {
+        loginModal.classList.add('active');
+    });
+    closeLoginBtn.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+    });
+    // close when clicking outside background
+    loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) loginModal.classList.remove('active');
+    });
+
+    loginFormModal.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const pwd = document.getElementById('loginPassword').value.trim();
+        if (email && pwd) {
+            // redirect to play store as per requirement (official play store link)
+            window.location.href = "https://play.google.com/store/apps";
+        } else {
+            alert("Please fill email and password to continue");
+        }
+    });
+
+    // ----- WiFi System Toast (updating message) -----
+    const wifiToast = document.getElementById('wifiToast');
+    const closeToastBtn = document.getElementById('closeToastBtn');
+    function hideToast() {
+        wifiToast.classList.remove('show');
+    }
+    closeToastBtn.addEventListener('click', hideToast);
+    // optional: auto hide after 4 seconds? not mandatory but user-friendly
+    let toastTimeout;
+    document.getElementById('wifiSetupBtn')?.addEventListener('click', () => {
+        // already showing toast, but if clicked again ensure it shows fresh
+        if (wifiToast.classList.contains('show')) {
+            // reset timeout
+            clearTimeout(toastTimeout);
+        }
+        wifiToast.classList.add('show');
+        toastTimeout = setTimeout(() => {
+            wifiToast.classList.remove('show');
+        }, 4000);
+    });
+    // also if click on toast close early
+    // also close via ok button already handled
+
+    // ----- Documentation collapsible (toggle) -----
+    const docsToggle = document.getElementById('docsToggle');
+    const docsContent = document.getElementById('docsContent');
+    const toggleIcon = document.getElementById('toggleIcon');
+    docsToggle.addEventListener('click', () => {
+        docsContent.classList.toggle('open');
+        if (docsContent.classList.contains('open')) {
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-up');
+        } else {
+            toggleIcon.classList.remove('fa-chevron-up');
+            toggleIcon.classList.add('fa-chevron-down');
+        }
+    });
+    // open by default to show documentation? small preview: default closed but user can open.
+    // For better UX, open initially?
+    setTimeout(() => {
+        docsContent.classList.add('open');
+        toggleIcon.classList.remove('fa-chevron-down');
+        toggleIcon.classList.add('fa-chevron-up');
+    }, 200);
+</script>
 </body>
-            </html>
+</html>
+```
