@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Sohel Hossain - Pro Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mohammad Sohel Hossain - Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -11,12 +11,12 @@
             --neon-blue: #00f2ff;
             --bg-dark: #050f08; 
             --yt-red: #ff0000;
-            --card-blue: #002b53; /* গাঢ় নীল ব্যাকগ্রাউন্ড */
-            --card-hover: #004080;
+            --deep-blue: #002b53;
+            --glow: 0 0 15px rgba(0, 242, 255, 0.6);
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
             background: var(--bg-dark);
@@ -27,29 +27,23 @@
             overflow: hidden;
         }
 
-        .top-bar {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--neon-blue);
-            letter-spacing: 2px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
+        /* ১. প্রোফাইল সেকশন (৮০px - একদম উপরে) */
         .profile-container {
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 20px;
-            background: linear-gradient(90deg, #001f3f, #002b53);
+            padding: 0 20px;
+            background: var(--deep-blue);
             border-bottom: 2px solid var(--neon-blue);
+            box-shadow: var(--glow);
+            z-index: 10;
         }
 
         .user-details {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .avatar {
@@ -64,66 +58,83 @@
         .user-text h2 {
             margin: 0;
             font-size: 13px;
-            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .user-text p {
-            margin: 1px 0 0;
+            margin: 2px 0 0;
             font-size: 10px;
             color: var(--neon-blue);
+            font-weight: bold;
         }
 
+        /* ২. ইউটিউব সেকশন (১৬০px) */
         .youtube-section {
             padding: 15px 20px;
+            height: 160px;
         }
 
         .yt-btn {
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             background: #1a0000;
             border: 3px solid var(--yt-red);
-            border-radius: 15px;
-            padding: 20px 0;
+            border-radius: 20px;
             text-decoration: none;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transition: 0.3s;
         }
 
-        .yt-btn i { font-size: 45px; color: var(--yt-red); }
-        .yt-btn span { color: white; font-weight: bold; margin-top: 5px; font-size: 18px; }
+        .yt-btn i {
+            font-size: 80px; /* আইকন বড় করা হয়েছে */
+            color: var(--yt-red);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+        }
 
-        /* App Grid - বক্স সাইজ আপডেট করা হয়েছে */
+        .yt-btn span {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        /* ৩. অ্যাপ গ্রিড (৩০০px এলাকা) */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 5px 20px 20px;
+            gap: 15px;
+            padding: 10px 20px;
             flex: 1;
+            align-content: start;
         }
 
         .app-card {
-            background: var(--card-blue); /* গাঢ় নীল রঙ */
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            border-radius: 12px;
+            height: 85px; /* আপনার চাহিদা অনুযায়ী উচ্চতা */
+            background: var(--deep-blue);
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             color: white;
-            height: 85px; /* আপনার চাহিদা অনুযায়ী ৮৫ পিক্সেল করা হয়েছে */
+            border: 1px solid rgba(0, 242, 255, 0.2);
             transition: all 0.2s ease;
         }
 
         .app-card:active {
-            background: var(--card-hover);
-            transform: scale(0.95);
+            transform: scale(0.92);
+            background: #003a70;
+            box-shadow: var(--glow);
         }
 
         .app-card i {
-            font-size: 30px; /* আইকন সাইজ ৩০ পিক্সেল */
-            margin-bottom: 5px;
+            font-size: 30px; /* আইকন সাইজ ৩০px */
+            margin-bottom: 8px;
         }
 
         .app-card span {
@@ -132,16 +143,19 @@
             text-align: center;
         }
 
+        /* ফাঁকা জায়গা (Margin) */
+        .spacer {
+            flex: 1;
+        }
+
         .footer-line {
-            height: 4px;
+            height: 3px;
             background: var(--neon-blue);
-            width: 100%;
+            box-shadow: var(--glow);
         }
     </style>
 </head>
 <body>
-
-    <div class="top-bar">MOHAMMAD SOHEL HOSSAIN</div>
 
     <div class="profile-container">
         <div class="user-details">
@@ -151,7 +165,7 @@
                 <p><i class="fas fa-check-circle"></i> PREMIUM USER</p>
             </div>
         </div>
-        <i class="fas fa-cog" style="color: var(--neon-blue); font-size: 18px;"></i>
+        <i class="fas fa-cog" style="color: var(--neon-blue); font-size: 20px;"></i>
     </div>
 
     <div class="youtube-section">
@@ -162,11 +176,11 @@
     </div>
 
     <div class="app-grid">
-        <a href="https://www.google.com" class="app-card">
+        <a href="https://google.com" class="app-card">
             <i class="fab fa-google" style="color: #4285F4;"></i>
             <span>Google</span>
         </a>
-        <a href="fb://facewebmodal/f?href=https://www.facebook.com" class="app-card">
+        <a href="fb://facewebmodal/f?href=https://facebook.com" class="app-card">
             <i class="fab fa-facebook" style="color: #1877F2;"></i>
             <span>Facebook</span>
         </a>
@@ -175,8 +189,8 @@
             <span>Gemini AI</span>
         </a>
 
-        <a href="intent://tiktok.com/#Intent;package=com.zhiliaoapp.musically;scheme=https;end" class="app-card">
-            <i class="fab fa-tiktok" style="color: #ff0050;"></i>
+        <a href="https://tiktok.com" class="app-card">
+            <i class="fab fa-tiktok" style="color: #FF0050;"></i>
             <span>TikTok</span>
         </a>
         <a href="whatsapp://send?text=Hi" class="app-card">
@@ -193,15 +207,16 @@
             <span>Dialer</span>
         </a>
         <a href="intent:#Intent;action=android.settings.WIFI_SETTINGS;end" class="app-card">
-            <i class="fas fa-wifi" style="color: #00f2ff;"></i>
+            <i class="fas fa-wifi" style="color: var(--neon-blue);"></i>
             <span>WiFi Setup</span>
         </a>
         <a href="https://github.com/new" class="app-card">
-            <i class="fab fa-github" style="color: #ffffff;"></i>
-            <span>GitHub Up</span>
+            <i class="fab fa-github" style="color: #FFF;"></i>
+            <span>GitHub New</span>
         </a>
     </div>
 
+    <div class="spacer"></div>
     <div class="footer-line"></div>
 
 </body>
