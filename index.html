@@ -3,259 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google - WiFi Data Dashboard</title>
+    <title>Mohammad Sohel Hossain - Pro Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --neon-blue: #00f2ff;
-            --bg-dark: #0b1c11;
+            --bg-dark: #050f08; 
             --yt-red: #ff0000;
+            --card-blue: #002b53; /* গাঢ় নীল রঙ */
+            --card-hover: #004080;
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at top right, #384f42, transparent 50%),
-                radial-gradient(circle at top left, #384f42, transparent 50%),
-                radial-gradient(circle at bottom left, #23432f, transparent 40%);
+            background: var(--bg-dark);
             color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--neon-blue);
+            letter-spacing: 3px;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: linear-gradient(90deg, #001f3f, #002b53);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-blue);
+            background: url('https://ui-avatars.com/api/?name=Sohel+Hossain&background=00f2ff&color=000');
+            background-size: cover;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .user-text h2 {
+            margin: 0;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .user-text p {
+            margin: 2px 0 0;
+            font-size: 11px;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .youtube-section {
+            padding: 15px 20px;
+        }
+
+        .yt-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            overflow: hidden; /* স্ক্রিন যাতে অহেতুক না নড়ে */
-        }
-
-        /* হেডার স্টাইল */
-        .header-top {
-            width: 100%;
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .header-top img { height: 22px; }
-
-        .number-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2px solid white;
-            color: var(--neon-blue);
-            display: flex;
             justify-content: center;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        /* লগইন সেকশন */
-        #login-section {
-            text-align: center;
-            margin-top: 25vh;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .login-btn {
-            margin-top: 25px;
-            padding: 15px 45px;
-            background: white;
-            color: #222;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,255,255,0.1);
-        }
-
-        /* ড্যাশবোর্ড কন্টেইনার */
-        #dashboard { display: none; width: 100%; height: calc(100vh - 60px); }
-
-        /* লোডিং বক্স */
-        .loading-box {
-            background: white;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            width: 80%;
-            max-width: 350px;
-            color: #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* প্রোফাইল কার্ড */
-        .profile-card {
-            width: 100%;
-            padding: 15px 20px;
-            background: rgba(0, 43, 83, 0.9);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--neon-blue);
-            box-sizing: border-box;
-        }
-
-        .user-info { display: flex; align-items: center; gap: 12px; }
-        .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--neon-blue); }
-        .user-text h2 { margin: 0; font-size: 13px; letter-spacing: 0.5px; }
-        .user-text p { margin: 2px 0 0; font-size: 10px; color: var(--neon-blue); font-weight: bold; }
-
-        /* ইউটিউব বাটন (কিবোর্ড সাইজ) */
-        .yt-banner {
-            width: 92%;
-            margin: 15px auto;
             background: #1a0000;
             border: 3px solid var(--yt-red);
             border-radius: 15px;
-            padding: 25px 0; /* কিবোর্ড চওড়া লুক */
-            text-align: center;
+            padding: 25px 0;
             text-decoration: none;
-            display: block;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
             transition: 0.3s;
         }
 
-        .yt-banner:active { transform: scale(0.96); }
-        .yt-banner i { font-size: 55px; color: var(--yt-red); }
-        .yt-label { color: var(--yt-red); font-weight: bold; font-size: 16px; margin-top: 8px; display: block; letter-spacing: 1.5px; }
+        .yt-btn i { font-size: 50px; color: var(--yt-red); }
+        .yt-btn span { color: white; font-weight: bold; margin-top: 8px; letter-spacing: 2px; }
 
-        /* ৯টি অ্যাপের গ্রিড (স্ক্রিনের নিচ পর্যন্ত) */
+        /* App Grid Styling */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 92%;
-            margin: 0 auto;
-            padding-bottom: 20px;
-            flex-grow: 1; /* এটি বাকি জায়গা দখল করবে */
+            gap: 12px;
+            padding: 10px 20px 20px;
+            flex: 1;
         }
 
         .app-card {
-            background: #001a33;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 15px 5px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
+            background: var(--card-blue);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            text-decoration: none;
+            color: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .app-card:active { transform: scale(0.9); border-color: var(--neon-blue); background: #002b4d; }
-        .app-card i { font-size: 28px; margin-bottom: 8px; }
-        .app-card span { font-size: 10px; font-weight: 500; }
+        .app-card:active {
+            background: var(--card-hover);
+            transform: scale(0.95);
+            border-color: var(--neon-blue);
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .app-card i {
+            font-size: 28px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+        }
+
+        .app-card span {
+            font-size: 11px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .footer-line {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
     </style>
 </head>
 <body>
 
-    <div class="header-top">
-        <img src="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png" alt="Google">
-        <div class="number-circle">0</div>
-    </div>
+    <div class="top-bar">MOHAMMAD SOHEL HOSSAIN</div>
 
-    <div id="login-section">
-        <h2 style="font-weight: 400; font-size: 22px;">Google Account Login</h2>
-        <p style="opacity: 0.7; font-size: 14px;">Verification required to access dashboard</p>
-        <button class="login-btn" onclick="handleLogin()">Login with Google</button>
-    </div>
-
-    <div id="dashboard">
-        <div id="loader" class="loading-box">
-            <h3 style="color: #2e7d32; margin: 0;">Access Granted!</h3>
-            <p style="font-size: 14px; margin: 10px 0;">WiFi Data Storage Loading...</p>
-            <i class="fas fa-circle-notch fa-spin" style="color: #007aff; font-size: 24px;"></i>
-        </div>
-
-        <div id="content" style="display:none; height: 100%; display: flex; flex-direction: column;">
-            
-            <div class="profile-card">
-                <div class="user-info">
-                    <img src="https://ui-avatars.com/api/?name=Sohel+Hossain&background=007aff&color=fff" class="avatar">
-                    <div class="user-text">
-                        <h2>MOHAMMAD SOHEL HOSSAIN</h2>
-                        <p><i class="fas fa-shield-check"></i> PREMIUM USER</p>
-                    </div>
-                </div>
-                <i class="fas fa-cog" style="color: #888;"></i>
-            </div>
-
-            <a href="https://www.youtube.com" target="_blank" class="yt-banner">
-                <i class="fab fa-youtube"></i>
-                <span class="yt-label">OPEN YOUTUBE APP</span>
-            </a>
-
-            <div class="app-grid">
-                <a href="https://google.com" class="app-card">
-                    <i class="fab fa-google" style="color: #4285F4;"></i>
-                    <span>Google</span>
-                </a>
-                <a href="https://facebook.com" class="app-card">
-                    <i class="fab fa-facebook" style="color: #1877F2;"></i>
-                    <span>Facebook</span>
-                </a>
-                <a href="https://gemini.google.com/" class="app-card">
-                    <i class="fas fa-wand-magic-sparkles" style="color: #8E75FF;"></i>
-                    <span>Gemini AI</span>
-                </a>
-                <a href="https://www.tiktok.com" class="app-card">
-                    <i class="fab fa-tiktok" style="color: #fff;"></i>
-                    <span>TikTok</span>
-                </a>
-                <a href="https://web.whatsapp.com" class="app-card">
-                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://quran.com" class="app-card">
-                    <i class="fas fa-book-quran" style="color: #FFD700;"></i>
-                    <span>Al-Quran</span>
-                </a>
-                <a href="tel:" class="app-card">
-                    <i class="fas fa-phone-alt" style="color: #34C759;"></i>
-                    <span>Phone Dial</span>
-                </a>
-                <a href="intent:#Intent;action=android.settings.WIFI_SETTINGS;end" class="app-card">
-                    <i class="fas fa-wifi" style="color: #007AFF;"></i>
-                    <span>WiFi Setup</span>
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.digibites.accubattery" class="app-card">
-                    <i class="fas fa-battery-three-quarters" style="color: #4CAF50;"></i>
-                    <span>AccuBattery</span>
-                </a>
+    <div class="profile-container">
+        <div class="user-details">
+            <div class="avatar"></div>
+            <div class="user-text">
+                <h2>MOHAMMAD SOHEL HOSSAIN</h2>
+                <p><i class="fas fa-check-circle"></i> PREMIUM USER</p>
             </div>
         </div>
+        <i class="fas fa-shield-halved" style="color: var(--neon-blue); font-size: 20px;"></i>
     </div>
 
-    <script>
-        function handleLogin() {
-            // ১. গুগল পেজ ওপেন
-            window.open("https://accounts.google.com/", "_blank");
-            
-            // ২. স্ক্রিন সুইচ
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
+    <div class="youtube-section">
+        <a href="intent://www.youtube.com/#Intent;package=com.google.android.youtube;scheme=https;end" class="yt-btn">
+            <i class="fab fa-youtube"></i>
+            <span>YOUTUBE PRO</span>
+        </a>
+    </div>
 
-            // ৩. ৩ সেকেন্ড ভেরিফিকেশন লোডিং
-            setTimeout(function() {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('content').style.display = 'flex';
-            }, 3000);
-        }
-    </script>
+    <div class="app-grid">
+        <a href="https://www.google.com" class="app-card">
+            <i class="fab fa-google" style="color: #4285F4;"></i>
+            <span>Google</span>
+        </a>
+        <a href="fb://facewebmodal/f?href=https://www.facebook.com" class="app-card">
+            <i class="fab fa-facebook" style="color: #1877F2;"></i>
+            <span>Facebook</span>
+        </a>
+        <a href="https://gemini.google.com" class="app-card">
+            <i class="fas fa-wand-magic-sparkles" style="color: #8E75FF;"></i>
+            <span>Gemini AI</span>
+        </a>
+
+        <a href="intent://tiktok.com/#Intent;package=com.zhiliaoapp.musically;scheme=https;end" class="app-card">
+            <i class="fab fa-tiktok" style="color: #ff0050;"></i>
+            <span>TikTok</span>
+        </a>
+        <a href="whatsapp://send?text=Hello" class="app-card">
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+            <span>WhatsApp</span>
+        </a>
+        <a href="https://quran.com" class="app-card">
+            <i class="fas fa-book-quran" style="color: #FFD700;"></i>
+            <span>Al-Quran</span>
+        </a>
+
+        <a href="tel:" class="app-card">
+            <i class="fas fa-phone-alt" style="color: #34C759;"></i>
+            <span>Dialer</span>
+        </a>
+        <a href="intent:#Intent;action=android.settings.WIFI_SETTINGS;end" class="app-card">
+            <i class="fas fa-wifi" style="color: #00f2ff;"></i>
+            <span>WiFi Setup</span>
+        </a>
+        <a href="https://github.com/new" class="app-card">
+            <i class="fab fa-github" style="color: #ffffff;"></i>
+            <span>GitHub Up</span>
+        </a>
+    </div>
+
+    <div class="footer-line"></div>
 
 </body>
-    </html>
+</html>
