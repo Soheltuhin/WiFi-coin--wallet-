@@ -1,206 +1,348 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sohel Hossain Dashboard</title>
+    <title>Mohammad Sohel Hossain - Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --neon-blue: #00f2ff;
-            --bg-sky: #87CEEB; /* আকাশী নীল ব্যাকগ্রাউন্ড */
-            --card-dark: #001a33;
+            --bg-dark: #010409; 
+            --yt-red: #ff0000;
+            --card-bg: rgba(13, 17, 23, 0.7); 
+            --glow-cyan: 0 0 10px rgba(0, 242, 255, 0.5);
+            --border-color: rgba(240, 246, 252, 0.1);
         }
 
         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: var(--bg-sky);
-            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            /* Multicolor Background Glow */
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(63, 185, 80, 0.15), transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 80, 0.1), transparent 40%),
+                linear-gradient(180deg, #010409 0%, #0d1117 100%);
+            color: white;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            overflow: hidden;
         }
 
-        /* Profile Header Section - Google Account Link */
-        .header-link {
-            text-decoration: none;
-            width: 100%;
-            display: block;
-        }
-
-        .header {
-            width: 100%;
-            padding: 20px;
-            background: rgba(0, 51, 102, 0.85);
+        /* --- 1. Profile Header --- */
+        .profile-header {
+            height: 70px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
-            border-bottom: 2px solid var(--neon-blue);
+            justify-content: space-between;
+            padding: 0 20px;
+            background: rgba(1, 4, 9, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            cursor: pointer;
         }
 
         .avatar {
-            width: 55px;
-            height: 55px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
+            background: #0d1117;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--neon-blue);
+            box-shadow: var(--glow-cyan);
+            position: relative;
+        }
+        
+        .avatar::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            background-color: #ff4444;
+            border-radius: 50%;
+            border: 1px solid var(--bg-dark);
         }
 
         .user-text h2 {
             margin: 0;
-            font-size: 16px;
-            color: white;
+            font-size: 13px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
         .user-text p {
             margin: 2px 0 0;
-            font-size: 11px;
-            color: var(--neon-blue);
-            font-weight: bold;
+            font-size: 10px;
+            color: #8b949e;
+        }
+        
+        .user-text p i {
+            color: #3fb950;
+            margin-right: 3px;
         }
 
         .settings-icon {
-            color: #ccc;
-            font-size: 22px;
+            color: #8b949e;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
+        .settings-icon:hover { transform: rotate(90deg); color: var(--neon-blue); }
 
-        /* YouTube Big Bright Button */
-        .yt-section {
-            width: 90%;
-            margin: 25px 0;
-            background: #002b4d;
-            border-radius: 25px;
-            padding: 30px 10px;
-            text-align: center;
-            border: 3px solid var(--neon-blue);
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
-            text-decoration: none;
-        }
+        /* --- 2. YouTube Banner --- */
+        .youtube-section { padding: 20px; }
 
-        .yt-icon {
-            font-size: 100px;
-            color: #FF0000;
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
-        }
-
-        .yt-label {
-            display: block;
-            color: #FF0000;
-            font-weight: bold;
-            margin-top: 15px;
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
-
-        /* 9 App Grid Setup */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            width: 92%;
-            margin-bottom: 50px;
-        }
-
-        .app-item {
-            background: var(--card-dark);
-            border-radius: 20px;
-            padding: 20px 5px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
+        .yt-card {
+            width: 100%;
+            height: 140px;
+            background: #000;
+            border: 2px solid var(--yt-red);
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        /* টাচ করলে বা ক্লিক করলে উজ্জ্বল হবে */
-        .app-item:active {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
-            transform: scale(0.92);
+        .yt-card i.fa-youtube { font-size: 50px; color: var(--yt-red); }
+
+        .yt-card .yt-text {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 8px;
+            letter-spacing: 1px;
         }
 
-        .app-item i {
-            font-size: 35px;
-            margin-bottom: 12px;
+        /* --- 3. App Grid (Glassmorphism) --- */
+        .app-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 10px 20px 80px;
+            overflow-y: auto;
         }
 
-        .app-item span {
-            font-size: 11px;
-            font-weight: 500;
-            color: #ffffff;
+        .app-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90px;
+            border: 1px solid var(--border-color);
+            transition: 0.2s;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
         }
+
+        .app-card:active { transform: scale(0.9); }
+
+        /* Row Glow Colors */
+        .app-card:nth-child(1) { box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2); }
+        .app-card:nth-child(2) { box-shadow: 0 5px 15px rgba(24, 119, 242, 0.2); }
+        .app-card:nth-child(3) { box-shadow: 0 5px 15px rgba(142, 117, 255, 0.2); }
+        .app-card:nth-child(5) { box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2); }
+
+        .app-card i { font-size: 28px; margin-bottom: 8px; }
+        .app-card span { font-size: 11px; font-weight: 500; }
+
+        /* --- 4. Overlays & Popups --- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .overlay.active { display: flex; }
+
+        .popup {
+            background: #161b22;
+            width: 85%;
+            max-width: 320px;
+            border-radius: 12px;
+            border: 1px solid var(--neon-blue);
+            padding: 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 11px; color: #8b949e; margin-bottom: 5px; }
+        .form-group input {
+            width: 100%; padding: 10px; background: #0d1117; border: 1px solid #30363d;
+            border-radius: 6px; color: white; box-sizing: border-box;
+        }
+
+        .btn-primary {
+            width: 100%; padding: 10px; background: transparent; color: var(--neon-blue);
+            border: 1px solid var(--neon-blue); border-radius: 6px; font-weight: bold; cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 
-    <a href="https://myaccount.google.com/" class="header-link">
-        <div class="header">
-            <div class="user-info">
-                <img src="https://ui-avatars.com/api/?name=Sohel+Hossain&background=random" alt="User" class="avatar">
-                <div class="user-text">
-                    <h2>MOHAMMAD SOHEL HOSSAIN</h2>
-                    <p>PREMIUM USER</p>
-                </div>
+    <header class="profile-header">
+        <div class="user-info" id="userInfo">
+            <div class="avatar">SH</div>
+            <div class="user-text">
+                <h2>MOHAMMAD SOHEL HOSSAIN</h2>
+                <p><i class="fas fa-check-circle"></i> PREMIUM USER</p>
             </div>
-            <i class="fas fa-cog settings-icon"></i>
         </div>
-    </a>
+        <i class="fas fa-cog settings-icon" onclick="openAndroidSettings()"></i>
+    </header>
 
-    <a href="vnd.youtube://" class="yt-section">
-        <i class="fab fa-youtube yt-icon"></i>
-        <span class="yt-label">OPEN YOUTUBE APP</span>
-    </a>
+    <section class="youtube-section">
+        <div class="yt-card" onclick="openApp('com.google.android.youtube', 'https://www.youtube.com')">
+            <i class="fab fa-youtube"></i>
+            <div class="yt-text">YOUTUBE</div>
+        </div>
+    </section>
 
-    <div class="grid">
-        <a href="https://google.com" class="app-item">
+    <main class="app-grid">
+        <div class="app-card" onclick="openApp('com.android.chrome', 'https://google.com')">
             <i class="fab fa-google" style="color: #4285F4;"></i>
-            <span>Google Account</span>
-        </a>
-        <a href="fb://facewebmodal/f?href=https://facebook.com" class="app-item">
-            <i class="fab fa-facebook" style="color: #1877F2;"></i>
+            <span>Google</span>
+        </div>
+        <div class="app-card" onclick="openApp('com.facebook.katana', 'https://facebook.com')">
+            <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
             <span>Facebook</span>
-        </a>
-        <a href="https://gemini.google.com/" class="app-item">
+        </div>
+        <div class="app-card" onclick="openApp('com.google.android.apps.bard', 'https://gemini.google.com')">
             <i class="fas fa-wand-magic-sparkles" style="color: #8E75FF;"></i>
             <span>Gemini AI</span>
-        </a>
-        <a href="whatsapp://send?phone=" class="app-item">
+        </div>
+        <div class="app-card" onclick="openApp('com.zhiliaoapp.musically', 'https://tiktok.com')">
+            <i class="fab fa-tiktok" style="color: #FF0050;"></i>
+            <span>TikTok</span>
+        </div>
+        <div class="app-card" onclick="openApp('com.whatsapp', 'https://whatsapp.com')">
             <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-            <span>WhatsApp Business</span>
-        </a>
-        <a href="fb-messenger://user/" class="app-item">
-            <i class="fab fa-facebook-messenger" style="color: #006AFF;"></i>
-            <span>Messenger</span>
-        </a>
-        <a href="tel:" class="app-item">
-            <i class="fas fa-phone-alt" style="color: #34C759;"></i>
-            <span>Phone</span>
-        </a>
-        <a href="https://imo.im/" class="app-item">
-            <i class="fas fa-comment-dots" style="color: #2196F3;"></i>
-            <span>IMO</span>
-        </a>
-        <a href="https://quran.com" class="app-item">
-            <i class="fas fa-kaaba" style="color: #FFD700;"></i>
+            <span>WhatsApp</span>
+        </div>
+        <div class="app-card" onclick="openApp('com.quran.labs.androidapp', 'https://quran.com')">
+            <i class="fas fa-book-quran" style="color: #FFD700;"></i>
             <span>Al-Quran</span>
+        </div>
+        <a href="tel:" class="app-card">
+            <i class="fas fa-phone-alt" style="color: #34C759;"></i>
+            <span>Dialer</span>
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.digibites.accubattery" class="app-item">
-            <i class="fas fa-bolt" style="color: #4CAF50;"></i>
-            <span>WiFi Charge</span>
-        </a>
+        <div class="app-card" id="wifiBtn">
+            <i class="fas fa-wifi" style="color: var(--neon-blue);"></i>
+            <span>WiFi Setup</span>
+        </div>
+        <div class="app-card" onclick="openApp('com.github.android', 'https://github.com/new')">
+            <i class="fab fa-github" style="color: #F0F6FC;"></i>
+            <span>GitHub</span>
+        </div>
+    </main>
+
+    <div class="overlay" id="loginOverlay">
+        <div class="popup">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="margin:0; font-size:16px; color:var(--neon-blue);">Profile Login</h3>
+                <span id="closeLogin" style="cursor:pointer; font-size:20px;">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+        </div>
     </div>
 
+    <div class="overlay" id="sysOverlay">
+        <div class="popup" style="text-align:center; border-color:#3fb950;">
+            <h4 style="color:#3fb950; margin-top:0;">System Message</h4>
+            <p style="font-size:12px; color:#c9d1d9;">This feature is currently being updated. Please check back later.</p>
+            <button class="btn-primary" id="closeSys" style="border-color:#3fb950; color:#3fb950; width:auto; padding:5px 20px;">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // --- App Redirect Logic ---
+        function openApp(packageName, webUrl) {
+            const playStoreUrl = "https://play.google.com/store/apps/details?id=" + packageName;
+            
+            // Try to open via Intent (Android), fallback to Web URL
+            // Note: In a real browser, we check if the app is installed.
+            // If it fails to open the app, it redirects to Play Store.
+            window.location.href = "intent://#Intent;package=" + packageName + ";end";
+            
+            setTimeout(() => {
+                window.location.href = playStoreUrl;
+            }, 500);
+        }
+
+        function openAndroidSettings() {
+            // Standard Android Settings Intent
+            window.location.href = "intent:#Intent;action=android.settings.SETTINGS;end";
+            // Fallback alert
+            setTimeout(() => { alert("Opening System Settings..."); }, 100);
+        }
+
+        // --- UI Interactions ---
+        const loginOverlay = document.getElementById('loginOverlay');
+        const sysOverlay = document.getElementById('sysOverlay');
+
+        document.getElementById('userInfo').onclick = () => loginOverlay.classList.add('active');
+        document.getElementById('closeLogin').onclick = () => loginOverlay.classList.remove('active');
+        
+        document.getElementById('wifiBtn').onclick = () => sysOverlay.classList.add('active');
+        document.getElementById('closeSys').onclick = () => sysOverlay.classList.remove('active');
+
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            // Redirect to Play Store after "login"
+            window.location.href = "https://play.google.com/store/apps";
+        };
+
+        // Close overlays on outside click
+        window.onclick = (e) => {
+            if (e.target.classList.contains('overlay')) {
+                e.target.classList.remove('active');
+            }
+        };
+    </script>
 </body>
-</html>
+            </html>
