@@ -160,5 +160,209 @@
         });
     </script>
 
+   }}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sohel Hossain Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --bg-sky: #87CEEB; /* আকাশী নীল ব্যাকগ্রাউন্ড */
+            --card-dark: #001a33;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-sky);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Profile Header Section - Google Account Link */
+        .header-link {
+            text-decoration: none;
+            width: 100%;
+            display: block;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 51, 102, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .user-text h2 {
+            margin: 0;
+            font-size: 16px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .user-text p {
+            margin: 2px 0 0;
+            font-size: 11px;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .settings-icon {
+            color: #ccc;
+            font-size: 22px;
+        }
+
+        /* YouTube Big Bright Button */
+        .yt-section {
+            width: 90%;
+            margin: 25px 0;
+            background: #002b4d;
+            border-radius: 25px;
+            padding: 30px 10px;
+            text-align: center;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+            text-decoration: none;
+        }
+
+        .yt-icon {
+            font-size: 100px;
+            color: #FF0000;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+        }
+
+        .yt-label {
+            display: block;
+            color: #FF0000;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        /* 9 App Grid Setup */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 92%;
+            margin-bottom: 50px;
+        }
+
+        .app-item {
+            background: var(--card-dark);
+            border-radius: 20px;
+            padding: 20px 5px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* টাচ করলে বা ক্লিক করলে উজ্জ্বল হবে */
+        .app-item:active {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: scale(0.92);
+        }
+
+        .app-item i {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .app-item span {
+            font-size: 11px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://myaccount.google.com/" class="header-link">
+        <div class="header">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Sohel+Hossain&background=random" alt="User" class="avatar">
+                <div class="user-text">
+                    <h2>MOHAMMAD SOHEL HOSSAIN</h2>
+                    <p>PREMIUM USER</p>
+                </div>
+            </div>
+            <i class="fas fa-cog settings-icon"></i>
+        </div>
+    </a>
+
+    <a href="vnd.youtube://" class="yt-section">
+        <i class="fab fa-youtube yt-icon"></i>
+        <span class="yt-label">OPEN YOUTUBE APP</span>
+    </a>
+
+    <div class="grid">
+        <a href="https://google.com" class="app-item">
+            <i class="fab fa-google" style="color: #4285F4;"></i>
+            <span>Google Account</span>
+        </a>
+        <a href="fb://facewebmodal/f?href=https://facebook.com" class="app-item">
+            <i class="fab fa-facebook" style="color: #1877F2;"></i>
+            <span>Facebook</span>
+        </a>
+        <a href="https://gemini.google.com/" class="app-item">
+            <i class="fas fa-wand-magic-sparkles" style="color: #8E75FF;"></i>
+            <span>Gemini AI</span>
+        </a>
+        <a href="whatsapp://send?phone=" class="app-item">
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+            <span>WhatsApp Business</span>
+        </a>
+        <a href="fb-messenger://user/" class="app-item">
+            <i class="fab fa-facebook-messenger" style="color: #006AFF;"></i>
+            <span>Messenger</span>
+        </a>
+        <a href="tel:" class="app-item">
+            <i class="fas fa-phone-alt" style="color: #34C759;"></i>
+            <span>Phone</span>
+        </a>
+        <a href="https://imo.im/" class="app-item">
+            <i class="fas fa-comment-dots" style="color: #2196F3;"></i>
+            <span>IMO</span>
+        </a>
+        <a href="https://quran.com" class="app-item">
+            <i class="fas fa-kaaba" style="color: #FFD700;"></i>
+            <span>Al-Quran</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.digibites.accubattery" class="app-item">
+            <i class="fas fa-bolt" style="color: #4CAF50;"></i>
+            <span>WiFi Charge</span>
+        </a>
+
+        }
+        </script>
+
 </body>
 </html>
