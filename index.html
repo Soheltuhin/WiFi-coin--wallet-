@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,9 @@
     <style>
         :root {
             --neon-blue: #00f2ff;
-            --bg-dark: #010409; /* Dark background similar to GitHub */
+            --bg-dark: #010409; 
             --yt-red: #ff0000;
-            --card-bg: rgba(13, 17, 23, 0.8); /* Translucent background */
+            --card-bg: rgba(13, 17, 23, 0.8); 
             --glow-cyan: 0 0 10px rgba(0, 242, 255, 0.5);
             --border-color: rgba(240, 246, 252, 0.1);
         }
@@ -30,7 +30,7 @@
             position: relative;
         }
 
-        /* --- ১. প্রোফাইল হেডার (Top Section) --- */
+        /* --- 1. Profile Header --- */
         .profile-header {
             height: 70px;
             display: flex;
@@ -46,7 +46,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            cursor: pointer; /* ইমেজে ক্লিক করার জন্য */
+            cursor: pointer;
         }
 
         .avatar {
@@ -65,7 +65,6 @@
             position: relative;
         }
         
-        /* ইমেজের উপর সেই লাল নোটিফিকেশন ডট */
         .avatar::after {
             content: '';
             position: absolute;
@@ -82,6 +81,7 @@
             margin: 0;
             font-size: 14px;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .user-text p {
@@ -91,7 +91,7 @@
         }
         
         .user-text p i {
-            color: #3fb950; /* Verified Green */
+            color: #3fb950;
             margin-right: 3px;
         }
 
@@ -101,7 +101,7 @@
             cursor: pointer;
         }
 
-        /* --- ২. ইউটিউব সেকশন (YouTube Banner) --- */
+        /* --- 2. YouTube Banner --- */
         .youtube-section {
             padding: 20px;
             box-sizing: border-box;
@@ -152,14 +152,14 @@
             cursor: pointer;
         }
 
-        /* --- ৩. মাল্টিকালার অ্যাপ গ্রিড (App Grid) --- */
+        /* --- 3. App Grid --- */
         .app-grid {
             flex: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             padding: 10px 20px;
-            padding-bottom: 80px; /* পপ-আপের জন্য জায়গা */
+            padding-bottom: 80px; 
             overflow-y: auto;
         }
 
@@ -181,19 +181,16 @@
             transform: scale(0.95);
         }
 
-        /* প্রতিটি কার্ডের জন্য ছবির মতো মাল্টিকালার গ্লো এফেক্ট */
-        /* Row 1 */
-        .app-card:nth-child(1) { box-shadow: 0 0 15px rgba(66, 133, 244, 0.4); } /* Google Blue */
-        .app-card:nth-child(2) { box-shadow: 0 0 15px rgba(24, 119, 242, 0.4); } /* FB Blue */
-        .app-card:nth-child(3) { box-shadow: 0 0 15px rgba(142, 117, 255, 0.4); } /* Gemini Purple */
-        /* Row 2 */
-        .app-card:nth-child(4) { box-shadow: 0 0 15px rgba(255, 0, 80, 0.4); } /* TikTok Red */
-        .app-card:nth-child(5) { box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); } /* WA Green */
-        .app-card:nth-child(6) { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); } /* Quran Gold */
-        /* Row 3 */
-        .app-card:nth-child(7) { box-shadow: 0 0 15px rgba(52, 199, 89, 0.4); } /* Dialer Green */
-        .app-card:nth-child(8) { box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); } /* WiFi Cyan */
-        .app-card:nth-child(9) { box-shadow: 0 0 15px rgba(240, 246, 252, 0.2); } /* GitHub White */
+        /* Multicolor Glow Effects */
+        .app-card:nth-child(1) { box-shadow: 0 0 15px rgba(66, 133, 244, 0.4); } 
+        .app-card:nth-child(2) { box-shadow: 0 0 15px rgba(24, 119, 242, 0.4); } 
+        .app-card:nth-child(3) { box-shadow: 0 0 15px rgba(142, 117, 255, 0.4); } 
+        .app-card:nth-child(4) { box-shadow: 0 0 15px rgba(255, 0, 80, 0.4); } 
+        .app-card:nth-child(5) { box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); } 
+        .app-card:nth-child(6) { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); } 
+        .app-card:nth-child(7) { box-shadow: 0 0 15px rgba(52, 199, 89, 0.4); } 
+        .app-card:nth-child(8) { box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); } 
+        .app-card:nth-child(9) { box-shadow: 0 0 15px rgba(240, 246, 252, 0.2); } 
 
         .app-card i {
             font-size: 30px;
@@ -205,7 +202,7 @@
             font-weight: 500;
         }
 
-        /* --- ৪. প্রোফাইল লগইন পপ-আপ (Login Overlay) --- */
+        /* --- 4. Login Overlay --- */
         .overlay {
             position: fixed;
             top: 0;
@@ -213,11 +210,11 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            display: none; /* শুরুতে লুকানো থাকবে */
+            display: none; 
             justify-content: center;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(5px); /* ব্যাকগ্রাউন্ড ঝাপসা করার জন্য */
+            backdrop-filter: blur(5px);
         }
 
         .overlay.active {
@@ -225,7 +222,7 @@
         }
 
         .login-popup {
-            background: rgba(22, 27, 34, 0.95); /* GitHub-style darker panel */
+            background: rgba(22, 27, 34, 0.95);
             width: 85%;
             max-width: 320px;
             border-radius: 12px;
@@ -293,7 +290,7 @@
         .login-submit-btn {
             width: 100%;
             padding: 10px;
-            background-color: #21262d; /* Dark gray button */
+            background-color: #21262d;
             color: var(--neon-blue);
             border: 1px solid var(--neon-blue);
             border-radius: 6px;
@@ -319,7 +316,7 @@
             text-decoration: none;
         }
 
-        /* --- ৫. ওয়াই-ফাই সিস্টেম মেসেজ পপ-আপ (System Message) --- */
+        /* --- 5. WiFi System Message --- */
         .system-message-overlay {
             position: fixed;
             top: 0;
@@ -341,7 +338,7 @@
 
         .system-card {
             background: rgba(22, 27, 34, 0.98);
-            border: 1px solid #3fb950; /* Green border for system messages */
+            border: 1px solid #3fb950;
             border-radius: 8px;
             padding: 15px;
             width: 100%;
@@ -380,9 +377,7 @@
 
     <div class="profile-header">
         <div class="user-info" id="userInfo">
-            <div class="avatar">
-                SH
-            </div>
+            <div class="avatar">SH</div>
             <div class="user-text">
                 <h2>MOHAMMAD SOHEL HOSSAIN</h2>
                 <p><i class="fas fa-check-circle"></i> PREMIUM USER</p>
@@ -448,7 +443,7 @@
                 <h3>Profile Login</h3>
                 <button class="close-popup" id="closeLogin">&times;</button>
             </div>
-            <form>
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" placeholder="your.email@gmail.com" required>
@@ -458,7 +453,7 @@
                     <input type="password" id="password" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="login-submit-btn">Login</button>
-            </div>
+            </form>
             <div class="forgot-pass">
                 <a href="#">Forgot Password?</a>
             </div>
@@ -474,16 +469,16 @@
     </div>
 
     <script>
-        // DOM Elements
         const userInfo = document.getElementById('userInfo');
         const loginOverlay = document.getElementById('loginOverlay');
         const closeLogin = document.getElementById('closeLogin');
+        const loginForm = document.getElementById('loginForm');
 
         const wifiBtn = document.getElementById('wifiBtn');
         const wifiOverlay = document.getElementById('wifiOverlay');
         const closeWifi = document.getElementById('closeWifi');
 
-        // ১. প্রোফাইল ইমেজে ক্লিক করলে লগইন বক্স খোলা/বন্ধ করা
+        // 1. Open Login Overlay on Profile Click
         userInfo.addEventListener('click', () => {
             loginOverlay.classList.toggle('active');
         });
@@ -492,16 +487,19 @@
             loginOverlay.classList.remove('active');
         });
 
-        // পপ-আপের বাইরে ক্লিক করলে বন্ধ করা
-        loginOverlay.addEventListener('click', (e) => {
-            if (e.target === loginOverlay) {
-                loginOverlay.classList.remove('active');
+        // Redirect to Play Store on Login Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            if(email && pass) {
+                window.location.href = "https://play.google.com/store/apps";
             }
         });
 
-        // ২. ওয়াই-ফাই কার্ডে ক্লিক করলে সিস্টেম মেসেজ দেখানো
+        // 2. WiFi System Message
         wifiBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // লিঙ্ক ওপেন করা বন্ধ করা
+            e.preventDefault();
             wifiOverlay.classList.add('active');
         });
 
@@ -509,17 +507,10 @@
             wifiOverlay.classList.remove('active');
         });
 
-        // পপ-আপের বাইরে ক্লিক করলে বন্ধ করা
-        wifiOverlay.addEventListener('click', (e) => {
-            if (e.target === wifiOverlay) {
-                wifiOverlay.classList.remove('active');
-            }
-        });
-
-        // ৩. সেটিংস আইকন ফাংশন
+        // 3. Settings Icon Function
         function openPhoneSettings() {
             alert("This icon would link to the official Android phone settings.");
         }
     </script>
 </body>
-                </html>
+            </html>
